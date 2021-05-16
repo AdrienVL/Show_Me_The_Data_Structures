@@ -20,13 +20,15 @@ class LRU_Cache(object):
 
     def get(self, key):
 
-        self.q.get() #Get oldest item and removes it from queue
 
+        
 
         # Retrieve item from provided key. Return -1 if nonexistent. 
         if self.dictionary.get(key) is None:
             return -1
         else:
+            oldest_element_key = self.q.get() #Get oldest item and removes it from queue
+            self.q.put(oldest_element_key)
             return self.dictionary.get(key)
 
     
@@ -37,7 +39,7 @@ class LRU_Cache(object):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
 
 
-        #Insert newest element to queue
+        #Insert newest key to queue
 
         new_set = {key:value}
         self.q.put(key)
@@ -47,6 +49,7 @@ class LRU_Cache(object):
 
         if  self.q_size==self.capacity:
             oldest_element_key = self.q.get() #Get oldest item and removes it fromq queue
+            print("oldest key{}".format(oldest_element_key))
             #Remove element key from dictionary
             self.dictionary.pop(oldest_element_key)
             #and update dictionary with new key value pair
@@ -70,6 +73,7 @@ our_cache.set(3, 3)
 our_cache.set(4, 4)
 
 print(our_cache.dictionary)
+
 
 
 print(our_cache.get(1))       # returns 1
