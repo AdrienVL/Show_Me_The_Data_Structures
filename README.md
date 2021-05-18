@@ -1,6 +1,6 @@
 # Show_Me_The_Data_Structures
 
-## Least Recently Used Cache 
+## Least Recently Used Cache Problem 1
 We have briefly discussed caching as part of a practice problem while studying hash maps.
 
 The lookup operation (i.e., get()) and put() / set() is supposed to be fast for a cache memory.
