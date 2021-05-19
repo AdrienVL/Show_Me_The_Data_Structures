@@ -20,7 +20,7 @@ All operations must take O(1) time.
 
 For the current problem, you can consider the size of cache = 5.
 
-## Least Recently Used Cache Problem 2
+## File Recursion
 For this problem, the goal is to write code for finding all files under a directory (and all directories beneath it) that end with ".c"
 
 Here is an example of a test directory listing, which can be downloaded here:
