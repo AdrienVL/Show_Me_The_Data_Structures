@@ -20,28 +20,64 @@ def find_files(suffix, path):
 
     filesList = []
 
-    if path is False:
-        filesList.append()
-    else:
-
         # Iterate through entire directory
             #If isfile - file ends with suffix - append to filesList else do nothing
             #if is directory - Join paths and call function recursively. --->> recursively
 
+
+    content = os.listdir(path)
+
+    # for item in content:
+    #     if os.path.isdir("{}/{}".format(path,item)):
+    #         #     print(suffix,os.path.join(path,item))
+    #         #     sub_compound = find_files(suffix,os.path.join(path,item))
+
+    #         new_path = "{}/{}".format(path,item)
+    #         print(new_path)
+ 
+    #         directory_list.append(new_path)
+    #         sub_compound = find_files(suffix,new_path)
+
+    #         print(sub_compound)
+
+    for item in content:
+        if os.path.isfile("{}/{}".format(path,item)):
+            if "{}/{}".format(path,item).endswith(suffix):
+                file_path = ("{}/{}".format(path,item))
+                filesList.append(file_path)
+        elif os.path.isdir("{}/{}".format(path,item)):
+            # print(suffix,os.path.join(path,item))
+            new_path = "{}/{}".format(path,item)
+
+            sub_compound = find_files(suffix,new_path)
+            print("sub_compound:{}".format(sub_compound))
+
+            for file in sub_compound:
+                print("file:{}".format(file))
+                filesList.append(file)
     
 
-        content = os.listdir(path)
-        for item in content:
-            # print(item)
-            if os.path.isfile("{}/{}".format(path,item)):
-                if "{}/{}".format(path,item).endswith(suffix):
-                    file_path = ("{}/{}".format(path,item))
-                    filesList.append(file_path)
-            elif os.path.isdir("{}/{}".format(path,item)):
-                find_files(suffix,os.path.join(path,item))
+                
+    # ./testdir
+    # ./testdir/subdir1
+    # ./testdir/subdir1/a.c
+    # ./testdir/subdir1/a.h
+    # ./testdir/subdir2
+    # ./testdir/subdir2/.gitkeep
+    # ./testdir/subdir3
+    # ./testdir/subdir3/subsubdir1
+    # ./testdir/subdir3/subsubdir1/b.c
+    # ./testdir/subdir3/subsubdir1/b.h
+    # ./testdir/subdir4
+    # ./testdir/subdir4/.gitkeep
+    # ./testdir/subdir5
+    # ./testdir/subdir5/a.c
+    # ./testdir/subdir5/a.h
+    # ./testdir/t1.c
+    # ./testdir/t1.h
 
 
-    #Is directory
+    # Is directory
     # print (path1[0])
     # print(os.path.join(path,path1[0]))
 
@@ -54,4 +90,4 @@ def find_files(suffix, path):
 
     return filesList
 
-print(find_files('.c','./testdir'))
+print(find_files('.h','./testdir'))
