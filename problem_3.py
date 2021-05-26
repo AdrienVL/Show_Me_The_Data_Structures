@@ -1,32 +1,81 @@
 import sys
-import heapq
+from heapq import heapify, heappush, heappop
 
-class Node:
-    def __init__(self, character, frequency):
+# class childNode:
+#     def __init__(self, character, frequency):
+#         self.character = character
+#         self.frequency = frequency
+
+        
+# class internalNode:
+#     def __init__(self, frequency):
+#         self.frequency = frequency
+#         self.left = None
+#         self.right = None
+
+#     def set_left_child(self,left):
+#         self.left = left
+        
+#     def set_right_child(self, right):
+#         self.right = right
+        
+#     def get_left_child(self):
+#         return self.left
+
+#     def get_right_child(self):
+#         return self.right
+
+    # def set_frequency(self,frequency):
+    #     self.frequency = frequency
+        
+    # def get_frequency(self):
+    #     return self.frequency
+
+class Node(object):
+        
+    def __init__(self, frequency = None, character = None):
         self.character = character
         self.frequency = frequency
         self.left = None
         self.right = None
-        self.next = None
-
-class LinkedList:
-    def __init__(self):
-        self.head = None
-
-    def append(self, character, frequency):
-        if self.head is None:
-            self.head = Node(character,frequency)
-            return
+        self.parent = None
         
-        # Move to the tail (the last node)
-        node = self.head
-        while node.next:
-            node = node.next
+    def get_frequency(self):
+        return self.frequency
+    
+    def get_character(self):
+        return self.character
         
-        node.next = Node(character,frequency)
-        return
+    def set_left_child(self,left):
+        self.left = left
+        
+    def set_right_child(self, right):
+        self.right = right
+        
+    def get_left_child(self):
+        return self.left
 
+    def set_parent(self, parent):
+        self.parent = parent
+        
+    def get_parent(self):
+        return self.parent
+    
+    def get_right_child(self):
+        return self.right
 
+    def has_left_child(self):
+        return self.left != None
+    
+    def has_right_child(self):
+        return self.right != None
+    
+    # define __repr_ to decide what a print statement displays for a Node object
+    def __repr__(self):
+        return f"Node({self.get_frequency()})"
+    
+    def __str__(self):
+        return f"Node({self.get_frequency()})"
 
 def huffman_encoding(data):
 
@@ -44,9 +93,12 @@ def huffman_encoding(data):
     #Create list fisrt
     #Convert list to nodes
 
-    linked_list = LinkedList()
+    # linked_list = LinkedList()
 
     stringDictionary = dict()
+
+    heap = []
+    heapify(heap)
 
     for c in data:
         if c in stringDictionary:
@@ -56,13 +108,49 @@ def huffman_encoding(data):
 
     
     for key in stringDictionary:
-        linked_list.append(key,stringDictionary[key])
+        node = Node(stringDictionary[key],key)
+        heappush(heap,(node.get_frequency(),node.get_character()))
 
-    node = linked_list.head
 
-    while node:
-        print(node.frequency)
-        node = node.next
+    for i in heap:
+        print(i)
+
+    print('+++++++++++++')
+
+
+
+
+    node = None    
+
+    while len(heap) != 1:
+        firstPop = heappop(heap)
+        secondPop = heappop(heap)
+
+        # print(firstPop[1])
+
+        if node is None:
+            node = Node(firstPop[0]+secondPop[0])
+        else:
+            node.set_parent(Node(firstPop[0]+secondPop[0]))
+            node = node.get_parent() 
+
+        print(node)
+        if firstPop[0] <= secondPop[0]:
+            node.set_left_child(Node(firstPop[0],firstPop[1]))
+            node.set_right_child(Node(secondPop[0],secondPop[1]))
+        else:
+            node.set_right_child(Node(firstPop[0],firstPop[1]))
+            node.set_left_child(Node(secondPop[0],secondPop[1]))
+
+        heappush(heap,(node.get_frequency(),node.get_character()))
+
+
+
+    # print(node.get_left_child())
+
+
+
+    return heap[0]
 
 
 
@@ -70,8 +158,8 @@ def huffman_encoding(data):
 
     
 
-def huffman_decoding(data,tree):
-    pass
+# def huffman_decoding(data,tree):
+#     pass
 
 # if __name__ == "__main__":
 #     codes = {}
