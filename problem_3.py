@@ -62,15 +62,7 @@ class Node(object):
     def __lt__(self, other):
             return self.get_frequency() < other.get_frequency()
 
-#             codewords = {}
-# def DFS(node, acc_code):
-#     if not node:
-#         return None
-#     if node.c:
-#         codewords[node.c] = (acc_code, node.freq)
-#     DFS(node.left, acc_code + '0')
-#     DFS(node.right, acc_code + '1') 
-# DFS(q[0][1], '')
+
 
 
 def pre_order(tree):
