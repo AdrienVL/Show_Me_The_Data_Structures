@@ -1,29 +1,30 @@
 import sys
 from heapq import heapify, heappush, heappop
 
-
 class Node(object):
         
     def __init__(self, frequency = None, character = None):
         self.character = character
         self.frequency = frequency
-        self.huffmanCode = None
+        self.bit = None
         self.left = None
         self.right = None
         self.parent = None
-        self.traversed = None
         
     def get_frequency(self):
         return self.frequency
-    
+
     def get_character(self):
         return self.character
 
-    def set_huffmanCode(self,huffmanCode):
-        self.huffmanCode = huffmanCode
+    def has_character(self):
+        return self.character != None
 
-    def get_huffmanCode(self):
-        return self.huffmanCode
+    def set_bit(self,bit):
+        self.bit = bit
+
+    def get_bit(self):
+        return self.bit
         
     def set_left_child(self,left):
         self.left = left
@@ -51,65 +52,58 @@ class Node(object):
     
     def has_right_child(self):
         return self.right != None
-    
-    # define __repr_ to decide what a print statement displays for a Node object
-    def __repr__(self):
-        return f"Node({self.get_frequency()})"
-    
-    def __str__(self):
-        return f"Node({self.get_frequency()})"
 
+    #Handles nodes that share the same frequencies. 
     def __lt__(self, other):
             return self.get_frequency() < other.get_frequency()
 
-
-
-
-def pre_order(tree):
+def pre_order(root_node):
     
-    binaryDictionary = dict()
+    chars_binary_dict = dict()
 
-    def traverse(node, acc_code):
+    #Pre-Order Traversal
+    def traverse(node, binary):
+
         if not node:
             return None
+
+        #Define binary for set character
         if node.get_character():
-            binaryDictionary[node.get_character()] = [acc_code, node.get_frequency()]
+            chars_binary_dict[node.get_character()] = [binary, node.get_frequency()]
             
         # traverse left subtree
-        traverse(node.get_left_child(), acc_code + '0')
+        traverse(node.get_left_child(), binary + '0')
         
         # traverse right subtree
-        traverse(node.get_right_child(), acc_code + '1')
+        traverse(node.get_right_child(), binary + '1')
     
 
-    traverse(tree, '')
+    traverse(root_node, '')
     
-    # return binaryDictionary
-    return binaryDictionary
+    return chars_binary_dict
 
 def huffman_encoding(data):
 
+    
     #1. Determine frequency of each character in message
-    #2. Each node has a character, frequency, left child and right child. 
-    #3. Build a priority queue using min-heap?
-    #4. More about Min-heaphttps://www.askpython.com/python/examples/min-heap
+    #2. Each node can have character, frequency, left child and right child, parent, and bit (except parent).
+    #3. Build a priority queue using min-heap.
+    #4. More about Min-heap: https://www.askpython.com/python/examples/min-heap
 
-
-
-    stringDictionary = dict()
+    chars_frequency_dict = dict()
     heap = []
 
     heapify(heap)
 
     for c in data:
-        if c in stringDictionary:
-            stringDictionary[c] += 1 
+        if c in chars_frequency_dict:
+            chars_frequency_dict[c] += 1 
         else:
-            stringDictionary[c] = 1 
+            chars_frequency_dict[c] = 1 
 
-    for key in stringDictionary:
+    for key in chars_frequency_dict:
 
-        node = Node(stringDictionary[key],key)
+        node = Node(chars_frequency_dict[key],key)
         heappush(heap,(node.get_frequency(),node))
 
 
@@ -123,13 +117,11 @@ def huffman_encoding(data):
         parent.set_left_child(firstPop[1])
         parent.set_right_child(secondPop[1])
 
-        parent.get_left_child().set_huffmanCode('0')
-        parent.get_right_child().set_huffmanCode('1')
+        parent.get_left_child().set_bit('0')
+        parent.get_right_child().set_bit('1')
 
         parent.get_left_child().set_parent(parent)
         parent.get_right_child().set_parent(parent)
-
-        # print(parent.get_left_child().get_huffmanCode())
 
         heappush(heap,(parent.get_frequency(),parent))
 
@@ -146,9 +138,7 @@ def huffman_encoding(data):
     for a in data:  
             encoded_data = encoded_data + (data_dictionary[a][0]) 
 
-
-
-    print(encoded_data)
+    # print(encoded_data)
     huffman_decoding(encoded_data,parent)
 
 
@@ -157,11 +147,27 @@ def huffman_encoding(data):
 
     
 
-def huffman_decoding(data,tree):
+def huffman_decoding(data, parent):
 
     decoded_string = ""
+    node = parent
 
-    pass
+
+
+    for c in data:
+
+        if c is '0':
+            node = node.get_left_child()
+        else:
+            node = node.get_right_child()
+
+        if node.has_character():
+            decoded_string = decoded_string + node.get_character()
+            node = parent
+
+
+
+    print(decoded_string)
 
 # if __name__ == "__main__":
 #     codes = {}
