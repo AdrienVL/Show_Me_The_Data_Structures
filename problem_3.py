@@ -95,6 +95,7 @@ def huffman_encoding(data):
     #4. More about Min-heaphttps://www.askpython.com/python/examples/min-heap
 
 
+
     stringDictionary = dict()
     heap = []
 
@@ -112,8 +113,6 @@ def huffman_encoding(data):
         heappush(heap,(node.get_frequency(),node))
 
 
-
-    huffmanList = list()
 
     while len(heap) != 1:
 
@@ -134,24 +133,23 @@ def huffman_encoding(data):
 
         heappush(heap,(parent.get_frequency(),parent))
 
-       
+    
 
+    #Recursion by DFS
 
-
-    #Recursively Remove nodes using DFS method.
-
-
-
-    print(pre_order(parent))
+    data_dictionary = pre_order(parent)
 
     encoded_data = ""
 
 
 
+    for a in data:  
+            encoded_data = encoded_data + (data_dictionary[a][0]) 
 
 
 
-    return 
+    print(encoded_data)
+    huffman_decoding(encoded_data,parent)
 
 
 
@@ -159,8 +157,11 @@ def huffman_encoding(data):
 
     
 
-# def huffman_decoding(data,tree):
-#     pass
+def huffman_decoding(data,tree):
+
+    decoded_string = ""
+
+    pass
 
 # if __name__ == "__main__":
 #     codes = {}
