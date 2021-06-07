@@ -11,6 +11,7 @@ class Node(object):
         self.left = None
         self.right = None
         self.parent = None
+        self.traversed = None
         
     def get_frequency(self):
         return self.frequency
@@ -33,14 +34,17 @@ class Node(object):
     def get_left_child(self):
         return self.left
 
+    def get_right_child(self):
+        return self.right
+
     def set_parent(self, parent):
         self.parent = parent
         
     def get_parent(self):
         return self.parent
-    
-    def get_right_child(self):
-        return self.right
+
+    def set_parent(self, parent):
+        self.parent = parent
 
     def has_left_child(self):
         return self.left != None
@@ -58,32 +62,38 @@ class Node(object):
     def __lt__(self, other):
             return self.get_frequency() < other.get_frequency()
 
-class Tree():
-    def __init__(self, value=None):
-        self.root = Node(value)
-        
-    def get_root(self):
-        return self.root
+#             codewords = {}
+# def DFS(node, acc_code):
+#     if not node:
+#         return None
+#     if node.c:
+#         codewords[node.c] = (acc_code, node.freq)
+#     DFS(node.left, acc_code + '0')
+#     DFS(node.right, acc_code + '1') 
+# DFS(q[0][1], '')
+
 
 def pre_order(tree):
     
-    visit_order = list()
-    
-    def traverse(node):
-        if node:
-            # visit the node
-            visit_order.append(node.get_frequency())
-            
-            # traverse left subtree
-            traverse(node.get_left_child())
-            
-            # traverse right subtree
-            traverse(node.get_right_child())
+    binaryDictionary = dict()
 
-    # traverse(tree.get_root())
-    traverse(tree)
+    def traverse(node, acc_code):
+        if not node:
+            return None
+        if node.get_character():
+            binaryDictionary[node.get_character()] = [acc_code, node.get_frequency()]
+            
+        # traverse left subtree
+        traverse(node.get_left_child(), acc_code + '0')
+        
+        # traverse right subtree
+        traverse(node.get_right_child(), acc_code + '1')
     
-    return visit_order
+
+    traverse(tree, '')
+    
+    # return binaryDictionary
+    return binaryDictionary
 
 def huffman_encoding(data):
 
@@ -93,19 +103,9 @@ def huffman_encoding(data):
     #4. More about Min-heaphttps://www.askpython.com/python/examples/min-heap
 
 
-    # head = Node('c',2)
-    # print(head.frequency)
-    # head.increment_frequency()
-    # print(head.frequency)
-
-    #Create list fisrt
-    #Convert list to nodes
-
-    # linked_list = LinkedList()
-
     stringDictionary = dict()
-
     heap = []
+
     heapify(heap)
 
     for c in data:
@@ -114,58 +114,52 @@ def huffman_encoding(data):
         else:
             stringDictionary[c] = 1 
 
-    
     for key in stringDictionary:
-        #Key is character
-        #stringDic[key] is frequency
+
         node = Node(stringDictionary[key],key)
         heappush(heap,(node.get_frequency(),node))
 
 
-    for i in heap:
-        print(i)
 
-    print('+++++++++++++')
-
-
- 
+    huffmanList = list()
 
     while len(heap) != 1:
-
-
 
         firstPop = heappop(heap)
         secondPop = heappop(heap)
     
-
         parent = Node(firstPop[0] + secondPop[0])
         parent.set_left_child(firstPop[1])
         parent.set_right_child(secondPop[1])
 
+        parent.get_left_child().set_huffmanCode('0')
+        parent.get_right_child().set_huffmanCode('1')
 
+        parent.get_left_child().set_parent(parent)
+        parent.get_right_child().set_parent(parent)
 
+        # print(parent.get_left_child().get_huffmanCode())
 
         heappush(heap,(parent.get_frequency(),parent))
 
        
 
-    # print(node.get_freq uency())
-    # tree = Tree(node.get_frequency())
+
 
     #Recursively Remove nodes using DFS method.
+
+
+
+    print(pre_order(parent))
+
     encoded_data = ""
 
-    # print(tree.get_root())
-
-
-    # print(parent.get_left_child().get_left_child().get_left_child())
-
-    # print(pre_order(parent))
 
 
 
 
-    # return heap[0]
+
+    return 
 
 
 
