@@ -2,7 +2,6 @@
 
 ## File Recursion
 
-Your paragraph should not be a detailed walkthrough of the code you provided, but provide your reasoning behind decisions made in the code. For example, why did you use that data structure? You also need to explain the efficiency (time and space) of your solution.
 
 I made use of the recommended modules to print files in my current directory, and check a file and its extension.
 
