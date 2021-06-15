@@ -141,3 +141,12 @@ if __name__ == "__main__":
     print ("The content of the encoded data is: {}\n".format(decoded_data))
 Visualization Resource
 Check this website to visualize the Huffman encoding for any string message - Huffman Visualization!
+
+
+## Active Directory Problem 4
+
+In Windows Active Directory, a group can consist of user(s) and group(s) themselves. We can construct this hierarchy as such. Where User is represented by str representing their ids.
+
+
+Write a function that provides an efficient look up of whether the user is in a group.
+
