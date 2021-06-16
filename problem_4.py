@@ -1,3 +1,6 @@
+
+#Windows Active Directory, a group can consist of user(s) and group(s) themselves.
+
 class Group(object):
     def __init__(self, _name):
         self.name = _name
@@ -38,8 +41,6 @@ parent.add_group(child2)
     # G-Parent -> G-Child -> G-Sub_Child -> U-sub_child
 
 
-# print(sub_child.get_users()[0])
-
 def is_user_in_group(user, group):
     """
     Return True if user is in the group, False otherwise.
@@ -51,16 +52,23 @@ def is_user_in_group(user, group):
 
     #Recursion - Assume Transitive relationship
 
-    for username in group.get_users():
-        if username == user:
+    #for user associated to each group.
+    for u in group.get_users():
+        if u == user:
             return True
 
     for sub_dir in group.get_groups():
+        #Recursively call user in group's sub_directory. If condition is match, return true. If none, False
         if is_user_in_group(user,sub_dir):
             return True
     
     return False
 
-#Parent has no users. Child has no users... (sub-child-user, parent)
+#Test Cases
 
-print(is_user_in_group("parent_user", parent))
+print(is_user_in_group("parent_user", parent)) #Return True
+print(is_user_in_group("random_user", parent)) #Return False
+print(is_user_in_group("sub_child_user", sub_child)) #Return True
+print(is_user_in_group("parent_user", sub_child)) #Return False
+
+
