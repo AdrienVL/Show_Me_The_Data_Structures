@@ -135,3 +135,26 @@ print (union(linked_list_3,linked_list_4))
 #Intersection returns empty
 print (intersection(linked_list_3,linked_list_4))
 
+# Test case 3
+
+linked_list_5 = LinkedList()
+linked_list_6 = LinkedList()
+
+#Test Case of multiple types
+element_5 = ['e',2,'a',35,6,'z','h']
+element_6 = [1,'h',8,9,'a',35,'b']
+
+for i in element_5:
+    linked_list_5.append(i)
+
+for i in element_6:
+    linked_list_6.append(i)
+
+print("=========Test Case 3 Lists =======")
+print(element_5)
+print(element_6)
+
+print("======== Test Case 3 Union=========")
+
+print (union(linked_list_5,linked_list_6))
+print (intersection(linked_list_5,linked_list_6))
