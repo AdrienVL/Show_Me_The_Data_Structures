@@ -2,7 +2,9 @@
 
 ## Union and Intersection
 
-I made use of our Node and Linkedlist classes implemented in our course to build out unions and intersections. I added an append function to chain elements of a list into a linked list. I created a to_list() function to convert a linked_list to list. Doing so allowed me to combine lists based off of unions and intersection. And then transforming them back into linked lists. I iterated through linked list and appended elements to these lists using while and for loops. 
+I made use of our Node and Linkedlist classes implemented in our course to build out unions and intersections. I added an append function to chain elements of a list into a linked list. I created a to_list() function to convert a linked_list to list. Doing so allowed me to combine lists based off of unions and intersection. And then transforming them back into linked lists. 
+
+I iterated through linked list and appended elements to these lists using while and for loops. 
 
 
     Time Complexity
