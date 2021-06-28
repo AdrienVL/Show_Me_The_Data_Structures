@@ -132,5 +132,6 @@ print(element_4)
 
 print("======== Test Case 2 Union=========")
 print (union(linked_list_3,linked_list_4))
+#Intersection returns empty
 print (intersection(linked_list_3,linked_list_4))
 
