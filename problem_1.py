@@ -27,6 +27,16 @@ class LRU_Cache(object):
 
     def set(self, key, value):
 
+
+        if key < 0:
+            print("Key must be positive.")
+            return
+
+        if type(key) is float:
+            print("Key must be int.")
+            return
+        
+
         #Insert newest key to queue
         new_set = {key:value}
         self.q.append(key)
@@ -71,5 +81,9 @@ our_cache.set(5, 5)
 our_cache.set(6, 6)
 
 print(our_cache.get(4))      # returns -1 because the cache reached it's capacity and 4 was the least recently used entry
+
+our_cache.set(-7,7)          # returns "Key must be positive." Key can't be negative
+
+our_cache.set(7.0,7)         # return "Key must be int." Key can't be float.
 
 print(our_cache.dictionary)
