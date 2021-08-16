@@ -27,7 +27,7 @@ class LRU_Cache(object):
 
     def set(self, key, value):
 
-
+        
         if key < 0:
             print("Key must be positive.")
             return

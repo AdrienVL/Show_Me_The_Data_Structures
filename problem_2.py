@@ -50,6 +50,8 @@ def find_files(suffix, path):
     except FileNotFoundError:
         return "Directory does not exist"
 
+    
+
     for item in content:
         if os.path.isfile("{}/{}".format(path,item)):
             if "{}/{}".format(path,item).endswith(suffix):
@@ -64,6 +66,7 @@ def find_files(suffix, path):
                 filesList.append(file)
     
 
+
     return filesList
 
 ## Test Cases
@@ -75,4 +78,6 @@ print(find_files('.gitkeep','./testdir')) #Returns ['./testdir/subdir4/.gitkeep'
 ## Edge Cases
 print(find_files('.h','./testdirsdfs')) #Returns directory does not exist.
 print(find_files('.py','./testdir')) #Returns []
+print(find_files(-1,'./testdir')) #Returns TypeError: endswith first arg must be str or a tuple of str, not int
+
 

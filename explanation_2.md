@@ -19,4 +19,6 @@ I made use of the recommended modules to print files in my current directory, an
 
         I used a list to store all files found. Append has a time complexity of O(1)
 
+    Space Complexity
 
+    O(N) - Recursive function's memory complexity is O(recursion depth)

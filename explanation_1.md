@@ -16,4 +16,6 @@ I took advantage of key value pairs from Dict() to quickly return cache entries.
 Dequeue implementation referring to the oldest entry in the cache that is replaced by a new one.
 
 
+Deque has a space complexity of O(N). You only add memory that holds current values and possible successors. 
+
 
