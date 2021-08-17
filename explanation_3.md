@@ -13,6 +13,8 @@ I used a mini-heap instead of a list to create a priority queue. Mini-heaps are 
 
         For Loops and Recursions - O(n)
 
+    Space Complexity
+        Inserting into a heap and sorting - O(1)
 
 
 

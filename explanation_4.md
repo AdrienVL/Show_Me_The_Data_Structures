@@ -13,3 +13,7 @@ recursion, assuming a transitive relationship between directories, to solve the 
     Data Structures
 
         Class structure uses a list to store user and group names.
+    
+    Space Complexity
+
+        Activity Directory has fixed side - O(1)

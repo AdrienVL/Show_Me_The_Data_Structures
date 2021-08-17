@@ -16,3 +16,6 @@ Iterating through chain using while loop to add block to end of list as well as 
     Data Structures
 
         Using Node, linked list, and Python Lists.
+
+    Space Complexity
+        Blockchain increases in size -> O(n)

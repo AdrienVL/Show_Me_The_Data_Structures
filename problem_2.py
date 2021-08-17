@@ -54,9 +54,15 @@ def find_files(suffix, path):
 
     for item in content:
         if os.path.isfile("{}/{}".format(path,item)):
-            if "{}/{}".format(path,item).endswith(suffix):
-                file_path = ("{}/{}".format(path,item))
-                filesList.append(file_path)
+            
+            try:
+                if "{}/{}".format(path,item).endswith(suffix):
+                    file_path = ("{}/{}".format(path,item))
+                    filesList.append(file_path)
+            except TypeError:
+                return "Suffix must be of type str."
+
+            
         else:
             new_path = "{}/{}".format(path,item)
 
