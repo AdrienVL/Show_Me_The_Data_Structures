@@ -105,3 +105,22 @@ blockchain3.append(4)
 
 
 print(blockchain3.to_list()) #Block with data: '' cannot be added to chain, so skipped. Block with data: '' cannot be added to chain, so skipped. Block with data: '4' cannot be added to chain, so skipped. []
+
+#Edge Test #1
+print("+++++++++++++++++++++++++++++++++++++++++++++")
+print("Blockchain 4")
+blockchain4 = BlockChain()
+
+print(blockchain4.to_list()) #[]
+
+#Edge Test #2
+print("+++++++++++++++++++++++++++++++++++++++++++++")
+print("Blockchain 5")
+blockchain5 = BlockChain()
+blockchain5.append("One")
+print(blockchain5.head.timestamp) #2021-08-18 08:22:33.950902
+blockchain5.append("Two")
+print(blockchain5.head.timestamp) #2021-08-18 08:22:33.950902
+blockchain5.append("Three")
+print(blockchain5.head.timestamp) #2021-08-18 08:22:33.950902
+

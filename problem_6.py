@@ -105,12 +105,12 @@ for i in element_2:
     linked_list_2.append(i)
 
 print("=========Test Case 1 Lists =======")
-print(element_1)
-print(element_2)
+print(element_1) #[3, 2, 4, 35, 6, 65, 6, 4, 3, 21]
+print(element_2) #[6, 32, 4, 9, 6, 1, 11, 21, 1]
 
 print("======== Test Case 1 Union=========")
-print (union(linked_list_1,linked_list_2))
-print (intersection(linked_list_1,linked_list_2))
+print (union(linked_list_1,linked_list_2)) #32 -> 65 -> 2 -> 35 -> 3 -> 4 -> 6 -> 1 -> 9 -> 11 -> 21
+print (intersection(linked_list_1,linked_list_2)) #4 -> 21 -> 6
 
 # Test case 2
 
@@ -127,13 +127,13 @@ for i in element_4:
     linked_list_4.append(i)
 
 print("=========Test Case 2 Lists =======")
-print(element_3)
-print(element_4)
+print(element_3) #[3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
+print(element_4) #[1, 7, 8, 9, 11, 21, 1]
 
 print("======== Test Case 2 Union=========")
-print (union(linked_list_3,linked_list_4))
-#Intersection returns empty
-print (intersection(linked_list_3,linked_list_4))
+print (union(linked_list_3,linked_list_4)) #65 -> 2 -> 35 -> 3 -> 4 -> 6 -> 1 -> 7 -> 8 -> 9 -> 11 -> 21 -> 23
+
+print (intersection(linked_list_3,linked_list_4)) #Intersection returns empty
 
 # Test case 3
 
@@ -141,8 +141,8 @@ linked_list_5 = LinkedList()
 linked_list_6 = LinkedList()
 
 #Test Case of multiple types
-element_5 = ['e',2,'a',35,6,'z','h']
-element_6 = [1,'h',8,9,'a',35,'b']
+element_5 = ['e',2,'a',35,6,'z','h'] 
+element_6 = [1,'h',8,9,'a',35,'b'] 
 
 for i in element_5:
     linked_list_5.append(i)
@@ -151,10 +151,54 @@ for i in element_6:
     linked_list_6.append(i)
 
 print("=========Test Case 3 Lists =======")
-print(element_5)
-print(element_6)
+print(element_5) #['e', 2, 'a', 35, 6, 'z', 'h']
+print(element_6) #[1, 'h', 8, 9, 'a', 35, 'b']
 
 print("======== Test Case 3 Union=========")
 
-print (union(linked_list_5,linked_list_6))
-print (intersection(linked_list_5,linked_list_6))
+print (union(linked_list_5,linked_list_6)) #1 -> 2 -> 35 -> b -> 6 -> 8 -> e -> 9 -> h -> z -> a
+print (intersection(linked_list_5,linked_list_6)) #35 -> a -> h
+
+# Edge case 1
+
+linked_list_1 = LinkedList()
+linked_list_2 = LinkedList()
+
+element_1 = []
+element_2 = [6,32,4,9,6,1,11,21,1]
+
+for i in element_1:
+    linked_list_1.append(i)
+
+for i in element_2:
+    linked_list_2.append(i)
+
+print("=========Edge Case 1 Lists =======")
+print(element_1) #[]
+print(element_2) #[6, 32, 4, 9, 6, 1, 11, 21, 1]
+
+print("======== Edge Case 1 Union=========")
+print (union(linked_list_1,linked_list_2)) #32 -> 1 -> 4 -> 6 -> 9 -> 11 -> 21
+print (intersection(linked_list_1,linked_list_2)) #Empty
+
+# Edge case 2
+
+linked_list_1 = LinkedList()
+linked_list_2 = LinkedList()
+
+element_1 = []
+element_2 = []
+
+for i in element_1:
+    linked_list_1.append(i)
+
+for i in element_2:
+    linked_list_2.append(i)
+
+print("=========Edge Case 1 Lists =======")
+print(element_1) #[]
+print(element_2) #[]
+
+print("======== Edge Case 1 Union=========")
+print (union(linked_list_1,linked_list_2)) #Empty
+print (intersection(linked_list_1,linked_list_2)) #Empty
