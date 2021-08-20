@@ -61,6 +61,7 @@ def pre_order(root_node):
     
     chars_binary_dict = dict()
 
+
     #Pre-Order Traversal
     def traverse(node, binary):
 
@@ -89,7 +90,8 @@ def huffman_encoding(data):
     #2. Each node can have character, frequency, left child and right child, parent, and bit (except parent).
     #3. Build a priority queue using min-heap.
     #4. Construct Huffman Tree (bottom to top)
-    #5. Encoding done by DFS traversal
+    #5. Encoding done by DFS 
+
 
     chars_frequency_dict = dict()
     heap = []
@@ -106,51 +108,62 @@ def huffman_encoding(data):
         heappush(heap,(node.get_frequency(),node))
 
 
+
+
     if len(heap) == 1:
-        parent = Node(heappop(heap)[0])
+        parent = Node(heappop(heap)[0], node.get_c())
+        print(parent.get_c())
+
+        chars_binary_dict = pre_order(parent)
+
+        encoded_data = ""
+
+        for c in data: 
+            encoded_data = encoded_data + "0"
+
+        return encoded_data, parent
+
+    else:
+
 
     #Building tree bottom to top, pushing parent node (frequency addition)
     
-    
-    while len(heap) != 1:
+        while len(heap) != 1:
+
+            try:
+                first_pop = heappop(heap)
+            except IndexError:
+                return "Empty String"
 
 
-        try:
+            # first_pop = heappop(heap)
+            second_pop = heappop(heap)
 
-            first_pop = heappop(heap)
-        except IndexError:
-            return "Empty String"
+            #[0] -> node frequency
+            parent = Node(first_pop[0] + second_pop[0])
+            parent.set_left_child(first_pop[1])
+            parent.set_right_child(second_pop[1])
 
+            parent.get_left_child().set_bit('0')
+            parent.get_right_child().set_bit('1')
 
-        # first_pop = heappop(heap)
-        second_pop = heappop(heap)
+            parent.get_left_child().set_parent(parent)
+            parent.get_right_child().set_parent(parent)
 
-        #[0] -> node frequency
-        parent = Node(first_pop[0] + second_pop[0])
-        parent.set_left_child(first_pop[1])
-        parent.set_right_child(second_pop[1])
-
-        parent.get_left_child().set_bit('0')
-        parent.get_right_child().set_bit('1')
-
-        parent.get_left_child().set_parent(parent)
-        parent.get_right_child().set_parent(parent)
-
-        heappush(heap,(parent.get_frequency(),parent))
+            heappush(heap,(parent.get_frequency(),parent))
 
 
-    
-    #Recursion by DFS
+        #Recursion by DFS
+        chars_binary_dict = pre_order(parent)
 
-    
-    chars_binary_dict = pre_order(parent)
+        encoded_data = ""
 
-    encoded_data = ""
+        for c in data: 
+            encoded_data = encoded_data + (chars_binary_dict[c][0]) 
 
-    for c in data: 
-        encoded_data = encoded_data + (chars_binary_dict[c][0]) 
 
-    return encoded_data, parent
+        print(encoded_data)
+        return encoded_data, parent
 
 
 def huffman_decoding(encoded_data, parent):
@@ -159,19 +172,28 @@ def huffman_decoding(encoded_data, parent):
     decoded_string = ""
     node = parent
 
-    for bit in encoded_data:
+    # print("Decoded String ".format(decoded_string))
+    # print("Character ".format(parent.))
+    if parent.get_left_child() is None or parent.get_left_child() is None:
+        for bit in encoded_data:
+            decoded_string= decoded_string + parent.get_c()
 
-        if bit is '0':
-            node = node.get_left_child()
-        else:
-            node = node.get_right_child()
+        return decoded_string
+    else:
 
-        if node.has_c():
-            decoded_string = decoded_string + node.get_c()
-            #Start from tree root
-            node = parent
+        for bit in encoded_data:
 
-    return decoded_string
+            if bit is '0':
+                node = node.get_left_child()
+            else:
+                node = node.get_right_child()
+
+            if node.has_c():
+                decoded_string = decoded_string + node.get_c()
+                #Start from tree root
+                node = parent
+
+        return decoded_string
 
 if __name__ == "__main__":
     codes = {}
@@ -281,24 +303,41 @@ if __name__ == "__main__":
 
     #Edge Case 2
 
-    print("Test Case 2\n")
+    # print("Test Case 2\n")
 
-    a_great_sentence = "AAAAA"
+    # a_great_sentence = "AAAAA"
+
+    # print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence))) #54
+    # print ("The content of the data is: {}\n".format(a_great_sentence)) #AAAAA
+
+    
+    # try:
+    #     encoded_data, tree = huffman_encoding(a_great_sentence) 
+    #     print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2)))) 
+    #     print ("The content of the encoded data is: {}\n".format(encoded_data)) 
+
+    #     decoded_data = huffman_decoding(encoded_data, tree)
+
+    #     print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data))) 
+    #     print ("The content of the encoded data is: {}\n".format(decoded_data)) 
+    # except ValueError:
+    #     print("Huffman Coding problem requires at least two distinct characters."   ) #Prints statement
+
+
+    # print("Test Case 2\n")
+
+    a_great_sentence = "AAAAAA"
 
     print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence))) #54
     print ("The content of the data is: {}\n".format(a_great_sentence)) #AAAAA
 
     
-    try:
-        encoded_data, tree = huffman_encoding(a_great_sentence) 
-        print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2)))) 
-        print ("The content of the encoded data is: {}\n".format(encoded_data)) 
+    encoded_data, tree = huffman_encoding(a_great_sentence) 
+    print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2)))) 
+    print ("The content of the encoded data is: {}\n".format(encoded_data)) 
 
-        decoded_data = huffman_decoding(encoded_data, tree)
+    decoded_data = huffman_decoding(encoded_data, tree)
 
-        print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data))) 
-        print ("The content of the encoded data is: {}\n".format(decoded_data)) 
-    except ValueError:
-        print("Huffman Coding problem requires at least two distinct characters.") #Prints statement
-
-
+    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data))) 
+    print ("The content of the encoded data is: {}\n".format(decoded_data)) 
+    # print("Huffman Coding problem requires at least two distinct characters."   ) #Prints statement
