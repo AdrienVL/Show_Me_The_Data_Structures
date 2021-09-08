@@ -284,7 +284,7 @@ if __name__ == "__main__":
     a_great_sentence = ""
 
     print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence))) #49
-    print ("The content of the data is: {}\n".format(a_great_sentence)) #
+    print ("The content of the data is: {}\n".format(a_great_sentence)) 
 
     
     if huffman_encoding(a_great_sentence) == "Empty String":
@@ -303,28 +303,6 @@ if __name__ == "__main__":
 
     #Edge Case 2
 
-    # print("Test Case 2\n")
-
-    # a_great_sentence = "AAAAA"
-
-    # print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence))) #54
-    # print ("The content of the data is: {}\n".format(a_great_sentence)) #AAAAA
-
-    
-    # try:
-    #     encoded_data, tree = huffman_encoding(a_great_sentence) 
-    #     print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2)))) 
-    #     print ("The content of the encoded data is: {}\n".format(encoded_data)) 
-
-    #     decoded_data = huffman_decoding(encoded_data, tree)
-
-    #     print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data))) 
-    #     print ("The content of the encoded data is: {}\n".format(decoded_data)) 
-    # except ValueError:
-    #     print("Huffman Coding problem requires at least two distinct characters."   ) #Prints statement
-
-
-    # print("Test Case 2\n")
 
     a_great_sentence = "AAAAAA"
 

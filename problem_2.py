@@ -84,6 +84,6 @@ print(find_files('.gitkeep','./testdir')) #Returns ['./testdir/subdir4/.gitkeep'
 ## Edge Cases
 print(find_files('.h','./testdirsdfs')) #Returns directory does not exist.
 print(find_files('.py','./testdir')) #Returns []
-print(find_files(-1,'./testdir')) #Returns TypeError: endswith first arg must be str or a tuple of str, not int
+print(find_files(-1,'./testdir')) #Returns TypeError: ends with first arg must be str or a tuple of str, not int
 
 
