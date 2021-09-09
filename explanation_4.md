@@ -16,4 +16,4 @@ recursion, assuming a transitive relationship between directories, to solve the 
     
     Space Complexity
 
-        Activity Directory has fixed side - O(1)
+        Activity Directory has fixed side - O(N)
